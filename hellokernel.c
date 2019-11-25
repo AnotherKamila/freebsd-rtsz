@@ -11,18 +11,20 @@ static int event_handler(struct module *module, int event, void *arg) {
     printf("Hello Kernel!\n");
     return 0;
   case MOD_QUIESCE:
+    printf("Noooooo!!! I don't wanna leaaave :'(\n");
+    return EBUSY;
   case MOD_UNLOAD:
-    printf("Bye Bye\n");
+    printf("Okay okay, I'm gone\n");
     return 0;
   default:
-    return EOPNOTSUPP; // Error, Operation Not Supported
+    return EOPNOTSUPP;
   }
 }
 
-static moduledata_t hello_conf = {
-    .name = "hellokernel",    /* module name */
-    .evhand = event_handler,  /* event handler */
-    .priv = NULL            /* extra data */
+static moduledata_t mod_data = {
+    .name   = "hellokernel",
+    .evhand = event_handler,
+    .priv   = NULL /* TODO what's this? */
 };
 
-DECLARE_MODULE(hello, hello_conf, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);
+DECLARE_MODULE(hellokernel, mod_data, SI_SUB_DRIVERS, SI_ORDER_MIDDLE);
