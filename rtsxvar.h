@@ -51,5 +51,7 @@ struct rtsz_softc {
 #define	RTSX_F_5229		0x08
 #define	RTSX_F_5229_TYPE_C	0x10
 #define	RTSX_F_525A		0x20
+/* mine follow -- TODO clean up */
+#define RTSZ_F_BAR1 0x0100
 
 #endif
